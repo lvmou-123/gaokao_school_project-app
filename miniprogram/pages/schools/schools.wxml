@@ -1,0 +1,58 @@
+<view class="schools-page">
+  <!-- Search -->
+  <view class="search-bar">
+    <input class="search-input" placeholder="搜索院校名称" bindinput="onKeywordInput" bindconfirm="handleSearch" />
+    <view class="filter-row">
+      <picker mode="selector" range="{{provinceList}}" bindchange="onProvinceChange">
+        <view class="filter-tag {{province ? 'active' : ''}}">{{province || '省份'}} ▾</view>
+      </picker>
+      <picker mode="selector" range="{{tagList}}" bindchange="onTagChange">
+        <view class="filter-tag {{tag ? 'active' : ''}}">{{tag || '标签'}} ▾</view>
+      </picker>
+      <view class="filter-tag" style="margin-left:auto;background:var(--primary-color);color:#fff;" bindtap="handleSearch">查询</view>
+    </view>
+  </view>
+
+  <!-- List -->
+  <view class="list-wrap" wx:if="{{!loading}}">
+    <view class="empty-state" wx:if="{{list.length === 0}}">
+      <view class="empty-icon">🏫</view>
+      <view class="empty-text">暂无院校数据</view>
+    </view>
+
+    <view class="school-list" wx:else>
+      <view
+        class="school-card"
+        wx:for="{{list}}"
+        wx:key="id"
+        data-id="{{item.id}}"
+        bindtap="goDetail"
+      >
+        <view class="card-header">
+          <text class="school-name">{{item.name}}</text>
+          <view class="favorite-btn {{favoriteMap[item.id] ? 'active' : ''}}" data-id="{{item.id}}" catchtap="toggleFavorite">
+            ♥
+          </view>
+        </view>
+        <view class="card-tags">
+          <view wx:for="{{item.tags || []}}" wx:key="this" class="tag {{item === '985' ? 'tag-danger' : item === '211' ? 'tag-warning' : 'tag-info'}}">{{item}}</view>
+          <view wx:if="{{!item.tags || item.tags.length === 0}}" class="tag tag-info">普通</view>
+        </view>
+        <view class="card-meta">
+          <text>📍 {{item.province || '—'}} · {{item.city || '—'}}</text>
+          <text>🏷 {{item.category || '—'}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="pagination" wx:if="{{total > size}}">
+      <view class="load-more" bindtap="loadMore">加载更多</view>
+      <text class="page-info">已加载 {{list.length}} / {{total}} 所</text>
+    </view>
+  </view>
+
+  <!-- Loading -->
+  <view class="loading-mask" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+</view>

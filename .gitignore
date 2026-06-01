@@ -1,0 +1,8 @@
+node_modules/
+.unimport
+miniprogram_npm/
+.eslintrc-auto-import.json
+*.log
+.DS_Store
+*.local.*
+

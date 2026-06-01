@@ -1,0 +1,48 @@
+<view class="majors-page">
+  <!-- Search -->
+  <view class="search-bar">
+    <input class="search-input" placeholder="搜索专业名称" bindinput="onKeywordInput" bindconfirm="handleSearch" />
+    <view class="filter-row">
+      <picker mode="selector" range="{{categoryList}}" bindchange="onCategoryChange">
+        <view class="filter-tag {{category ? 'active' : ''}}">{{category || '学科门类'}} ▾</view>
+      </picker>
+      <view class="filter-tag" style="margin-left:auto;background:var(--primary-color);color:#fff;" bindtap="handleSearch">查询</view>
+    </view>
+  </view>
+
+  <!-- List -->
+  <view class="list-wrap" wx:if="{{!loading}}">
+    <view class="empty-state" wx:if="{{list.length === 0}}">
+      <view class="empty-icon">📚</view>
+      <view class="empty-text">暂无专业数据</view>
+    </view>
+
+    <view class="major-list" wx:else>
+      <view class="major-card" wx:for="{{list}}" wx:key="id">
+        <view class="major-header">
+          <text class="major-name">{{item.name}}</text>
+          <text class="major-code">{{item.code}}</text>
+        </view>
+        <view class="major-meta">
+          <text>{{item.category || '—'}}</text>
+          <text>{{item.degree || '—'}}</text>
+          <text>{{item.duration || '—'}}</text>
+        </view>
+        <view class="major-desc" wx:if="{{item.description}}">{{item.description}}</view>
+        <view class="major-action" data-majorid="{{item.id}}" data-majorname="{{item.name}}" bindtap="viewSchools">
+          查看开设院校 →
+        </view>
+      </view>
+    </view>
+
+    <view class="pagination" wx:if="{{total > size}}">
+      <view class="load-more" bindtap="loadMore">加载更多</view>
+      <text class="page-info">已加载 {{list.length}} / {{total}} 个</text>
+    </view>
+  </view>
+
+  <!-- Loading -->
+  <view class="loading-mask" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+</view>

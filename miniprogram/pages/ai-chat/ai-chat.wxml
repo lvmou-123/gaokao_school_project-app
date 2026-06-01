@@ -1,0 +1,50 @@
+<view class="chat-page">
+  <!-- Score Form -->
+  <view class="score-card" wx:if="{{showScoreForm}}">
+    <view class="score-row">
+      <text class="score-label">总分</text>
+      <input class="score-input" type="number" placeholder="总分" value="{{score}}" bindinput="onScoreInput" />
+    </view>
+    <view class="score-row">
+      <text class="score-label">排名</text>
+      <input class="score-input" type="number" placeholder="全省排名" value="{{rankNum}}" bindinput="onRankInput" />
+    </view>
+    <view class="score-row">
+      <text class="score-label">省份</text>
+      <input class="score-input" placeholder="如：河南" value="{{province}}" bindinput="onProvinceInput" />
+    </view>
+    <view class="score-actions">
+      <view class="btn-primary small" bindtap="toggleScoreForm">收起</view>
+    </view>
+  </view>
+
+  <!-- Chat -->
+  <view class="chat-card">
+    <scroll-view class="chat-messages" scroll-y scroll-with-animation scroll-into-view="{{scrollToId}}">
+      <view wx:for="{{messages}}" wx:key="index" class="message {{item.role === 'user' ? 'message-user' : 'message-assistant'}}">
+        <view wx:if="{{item.role === 'assistant'}}" class="avatar avatar-ai">🤖</view>
+        <view class="bubble">{{item.content}}</view>
+        <view wx:if="{{item.role === 'user'}}" class="avatar avatar-user">👤</view>
+      </view>
+      <view class="message message-assistant" wx:if="{{loading}}">
+        <view class="avatar avatar-ai">🤖</view>
+        <view class="bubble">
+          <view class="dot-pulse"></view>
+        </view>
+      </view>
+      <view id="bottom-anchor"></view>
+    </scroll-view>
+
+    <view class="chat-input-area">
+      <view class="chat-input-row">
+        <view class="score-toggle" bindtap="toggleScoreForm">
+          {{showScoreForm ? '隐藏成绩' : '添加成绩'}}
+        </view>
+      </view>
+      <view class="input-row">
+        <input class="msg-input" placeholder="输入您的问题..." value="{{input}}" bindinput="onInput" bindconfirm="handleSend" confirm-type="send" />
+        <view class="send-btn {{input.trim() ? 'active' : ''}}" bindtap="handleSend">发送</view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,88 @@
+<view class="detail-page">
+  <!-- Loading -->
+  <view class="loading-mask" wx:if="{{loading}}"><text>加载中...</text></view>
+
+  <view wx:else>
+    <!-- School Info -->
+    <view class="info-card">
+      <view class="info-header">
+        <view class="info-title-group">
+          <text class="school-name">{{school.name || ''}}</text>
+          <view class="header-tags">
+            <view wx:for="{{school.tags || []}}" wx:key="this" class="tag {{item === '985' ? 'tag-danger' : item === '211' ? 'tag-warning' : 'tag-primary'}}">{{item}}</view>
+          </view>
+        </view>
+        <view class="info-code">院校代码：{{school.code || '—'}}</view>
+      </view>
+
+      <view class="info-grid">
+        <view class="info-item">
+          <text class="info-label">院校类别</text>
+          <text class="info-value">{{school.category || '—'}}</text>
+        </view>
+        <view class="info-item">
+          <text class="info-label">省份</text>
+          <text class="info-value">{{school.province || '—'}}</text>
+        </view>
+        <view class="info-item">
+          <text class="info-label">城市</text>
+          <text class="info-value">{{school.city || '—'}}</text>
+        </view>
+        <view class="info-item info-full">
+          <text class="info-label">简介</text>
+          <text class="info-desc">{{school.description || '暂无'}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- Majors -->
+    <view class="section-card">
+      <view class="section-header">
+        <text class="section-title">开设专业</text>
+        <text class="section-count" wx:if="{{majors.length}}">共 {{majors.length}} 个</text>
+      </view>
+      <view class="empty-state" wx:if="{{majors.length === 0}}">
+        <view class="empty-icon">📖</view>
+        <text class="empty-text">暂无专业数据</text>
+      </view>
+      <view class="major-table" wx:else>
+        <view class="major-row" wx:for="{{majors}}" wx:key="id">
+          <view class="major-row-header">
+            <text class="major-row-name">{{item.name}}</text>
+            <text class="major-row-code">{{item.code}}</text>
+          </view>
+          <view class="major-row-meta">
+            <text>{{item.category || '—'}}</text>
+            <text>{{item.degree || '—'}}</text>
+            <text>{{item.duration || '—'}}</text>
+          </view>
+          <text class="major-row-desc" wx:if="{{item.description}}">{{item.description}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- Recommendation -->
+    <view class="section-card recommend-card">
+      <view class="section-header">
+        <text class="section-title">智能推荐</text>
+        <view class="btn-primary small" style="padding: 12rpx 32rpx" bindtap="handleRecommend">
+          {{recommending ? '推荐中...' : '开始推荐'}}
+        </view>
+      </view>
+      <view class="empty-state" wx:if="{{recommendations.length === 0}}">
+        <view class="empty-icon">🎯</view>
+        <text class="empty-text">点击「开始推荐」获取冲刺/稳妥/保底建议</text>
+      </view>
+      <view class="recommend-list" wx:else>
+        <view class="recommend-item" wx:for="{{recommendations}}" wx:key="id">
+          <view class="recommend-header">
+            <text class="recommend-school">{{item.schoolName}}</text>
+            <view class="tag {{item.probability === '冲刺' ? 'tag-danger' : item.probability === '稳妥' ? 'tag-warning' : 'tag-success'}}">{{item.probability}}</view>
+          </view>
+          <text class="recommend-reason">{{item.reason}}</text>
+          <text class="recommend-major" wx:if="{{item.majorName}}">推荐专业：{{item.majorName}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

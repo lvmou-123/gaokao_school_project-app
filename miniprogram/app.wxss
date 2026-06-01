@@ -1,0 +1,209 @@
+/* ====== CSS Variables ====== */
+page {
+  --primary-gradient: linear-gradient(135deg, #667eea, #764ba2);
+  --primary-color: #667eea;
+  --primary-light: rgba(102, 126, 234, 0.12);
+  --bg-color: #0a0a14;
+  --surface-color: #16162a;
+  --surface-hover: #1c1c34;
+  --card-border: rgba(255, 255, 255, 0.06);
+  --card-radius: 12px;
+  --text-primary: #e8e8f0;
+  --text-secondary: #a0a0b8;
+  --text-muted: #6b6b80;
+  --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.2);
+  --shadow-hover: 0 4px 20px rgba(0, 0, 0, 0.3);
+
+  background: var(--bg-color);
+  color: var(--text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;
+  font-size: 28rpx;
+  line-height: 1.6;
+  box-sizing: border-box;
+}
+
+/* ====== Global Reset ====== */
+view,
+scroll-view,
+swiper,
+movable-view,
+cover-view,
+cover-image {
+  box-sizing: border-box;
+}
+
+/* ====== Scrollbar ====== */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+/* ====== Common Classes ====== */
+.page-container {
+  max-width: 700rpx;
+  margin: 0 auto;
+  padding: 24rpx;
+  min-height: 100vh;
+}
+
+.surface-card {
+  background: var(--surface-color);
+  border-radius: var(--card-radius);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.page-title {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 16rpx;
+}
+
+.search-bar {
+  background: var(--surface-color);
+  border-radius: 16rpx;
+  padding: 24rpx;
+  border: 1px solid var(--card-border);
+  margin-bottom: 16rpx;
+}
+
+.search-bar .search-input {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12rpx;
+  padding: 16rpx 24rpx;
+  color: var(--text-primary);
+  font-size: 28rpx;
+  width: 100%;
+}
+
+.search-bar .search-input::placeholder {
+  color: var(--text-muted);
+}
+
+.filter-row {
+  display: flex;
+  gap: 16rpx;
+  margin-top: 16rpx;
+}
+
+.filter-tag {
+  padding: 8rpx 20rpx;
+  border-radius: 8rpx;
+  font-size: 24rpx;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-secondary);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.filter-tag.active {
+  background: var(--primary-light);
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+/* ====== Empty State ====== */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80rpx 40rpx;
+  color: var(--text-muted);
+}
+
+.empty-icon {
+  font-size: 64rpx;
+  margin-bottom: 16rpx;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  margin-bottom: 24rpx;
+}
+
+/* ====== Primary Button ====== */
+.btn-primary {
+  background: var(--primary-gradient);
+  color: #fff;
+  border: none;
+  border-radius: 12rpx;
+  padding: 20rpx 48rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-primary:active {
+  opacity: 0.9;
+}
+
+.btn-primary.small {
+  padding: 12rpx 32rpx;
+  font-size: 24rpx;
+}
+
+/* ====== Tag Styles ====== */
+.tag {
+  display: inline-block;
+  padding: 4rpx 16rpx;
+  border-radius: 6rpx;
+  font-size: 22rpx;
+  line-height: 1.4;
+}
+
+.tag-danger {
+  background: rgba(245, 108, 108, 0.15);
+  color: #f56c6c;
+  border: 1px solid rgba(245, 108, 108, 0.3);
+}
+
+.tag-warning {
+  background: rgba(230, 162, 60, 0.15);
+  color: #e6a23c;
+  border: 1px solid rgba(230, 162, 60, 0.3);
+}
+
+.tag-success {
+  background: rgba(103, 194, 58, 0.15);
+  color: #67c23a;
+  border: 1px solid rgba(103, 194, 58, 0.3);
+}
+
+.tag-info {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-secondary);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tag-primary {
+  background: rgba(102, 126, 234, 0.15);
+  color: var(--primary-color);
+  border: 1px solid rgba(102, 126, 234, 0.3);
+}
+
+/* ====== Loading ====== */
+.loading-mask {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80rpx 0;
+}
+
+/* ====== Loading dots ====== */
+.dot-pulse {
+  display: inline-block;
+  width: 12rpx;
+  height: 12rpx;
+  border-radius: 50%;
+  background: var(--text-muted);
+  animation: dotPulse 1.2s infinite ease-in-out;
+}
+
+@keyframes dotPulse {
+  0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
+  40% { opacity: 1; transform: scale(1); }
+}

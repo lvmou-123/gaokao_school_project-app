@@ -1,0 +1,53 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/schools/schools",
+    "pages/majors/majors",
+    "pages/profile/profile",
+    "pages/school-detail/school-detail",
+    "pages/favorites/favorites",
+    "pages/ai-chat/ai-chat"
+  ],
+  "window": {
+    "backgroundColor": "#0a0a14",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#16162a",
+    "navigationBarTitleText": "高考志愿填报助手",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#6b6b80",
+    "selectedColor": "#667eea",
+    "backgroundColor": "#16162a",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页",
+        "iconPath": "images/tab-home.png",
+        "selectedIconPath": "images/tab-home-active.png"
+      },
+      {
+        "pagePath": "pages/schools/schools",
+        "text": "院校",
+        "iconPath": "images/tab-schools.png",
+        "selectedIconPath": "images/tab-schools-active.png"
+      },
+      {
+        "pagePath": "pages/majors/majors",
+        "text": "专业",
+        "iconPath": "images/tab-majors.png",
+        "selectedIconPath": "images/tab-majors-active.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的",
+        "iconPath": "images/tab-profile.png",
+        "selectedIconPath": "images/tab-profile-active.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2",
+  "lazyCodeLoading": "requiredComponents"
+}
